@@ -43,10 +43,20 @@ func videoFiles(c web.C, w http.ResponseWriter, r *http.Request) {
 	encoder.Encode(files)
 }
 
+func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
+	filename, _ := base64.StdEncoding.DecodeString(c.URLParams["name"])
+	string_filename := string(filename[:])
+
+	fmt.Fprintf(w, "%s", string_filename)
+}
+
 func main() {
 
 	goji.Get("/", home)
 	goji.Get("/files", videoFiles)
+
+	goji.Post("/file/:name/start", startVideo)
+
 	goji.Handle("/assets/*", http.FileServer(http.Dir(".")))
 
 	goji.Serve()

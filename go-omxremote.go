@@ -28,7 +28,12 @@ type Video struct {
 
 func home(c web.C, w http.ResponseWriter, r *http.Request) {
 	p := &Page{Title: "gomxremote"}
-	t, _ := template.ParseFiles("views/index.html")
+	tmpl, err := FSString(false, "/views/index.html")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	t, _ := template.New("index").Parse(tmpl)
 	t.Execute(w, p)
 }
 
@@ -92,7 +97,7 @@ func main() {
 	goji.Post("/file/:name/pause", togglePlayVideo)
 	goji.Post("/file/:name/stop", stopVideo)
 
-	goji.Handle("/assets/*", http.FileServer(http.Dir(".")))
+	goji.Handle("/assets/*", http.FileServer(FS(false)))
 
 	goji.Serve()
 }

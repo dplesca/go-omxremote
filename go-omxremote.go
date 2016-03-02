@@ -11,6 +11,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 
 	"github.com/zenazn/goji"
 	"github.com/zenazn/goji/web"
@@ -58,10 +59,22 @@ func videoFiles(c web.C, w http.ResponseWriter, r *http.Request) {
 func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 	filename, _ := base64.StdEncoding.DecodeString(c.URLParams["name"])
 	string_filename := string(filename[:])
+	escapePathReplacer := strings.NewReplacer(
+		"[", "\\[",
+		"]", "\\]",
+		"(", "\\(",
+		")", "\\)",
+		"'", "\\'",
+		" ", "\\ ",
+		"*", "\\*",
+		"?", "\\?",
+	)
+	escapedPath := escapePathReplacer.Replace(string_filename)
 
 	fifo_cmd := exec.Command("mkfifo", fifo)
 	fifo_cmd.Run()
-	cmd := exec.Command("bash", "-c", "omxplayer -o hdmi "+string_filename+" < "+fifo)
+
+	cmd := exec.Command("bash", "-c", "omxplayer -o hdmi "+escapedPath+" < "+fifo)
 	err := cmd.Start()
 	if err != nil {
 		log.Fatal(err)

@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"html/template"
 	"log"
@@ -16,6 +17,8 @@ import (
 )
 
 const fifo string = "omxcontrol"
+
+var videosPath string
 
 type Page struct {
 	Title string
@@ -39,7 +42,7 @@ func home(c web.C, w http.ResponseWriter, r *http.Request) {
 
 func videoFiles(c web.C, w http.ResponseWriter, r *http.Request) {
 	var files []*Video
-	var root = "."
+	var root = videosPath
 	_ = filepath.Walk(root, func(path string, f os.FileInfo, _ error) error {
 		if f.IsDir() == false {
 			if filepath.Ext(path) == ".mkv" || filepath.Ext(path) == ".mp4" || filepath.Ext(path) == ".avi" {
@@ -88,6 +91,8 @@ func stopVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
+	flag.StringVar(&videosPath, "media", ".", "path to look for videos in")
 
 	goji.Get("/", home)
 	goji.Get("/files", videoFiles)

@@ -19,14 +19,6 @@ import (
 
 const fifo string = "omxcontrol"
 
-var commands *strings.Replacer = strings.NewReplacer(
-	"play", "p",
-	"pause", "p",
-	"subs", "m",
-	"quit", "q",
-	"forward", "\x5b\x43",
-)
-
 var videosPath string
 
 type Page struct {
@@ -151,6 +143,15 @@ func backwardVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 }
 
 func sendCommand(command string) error {
+	commands := strings.NewReplacer(
+		"play", "p",
+		"pause", "p",
+		"subs", "m",
+		"quit", "q",
+		"forward", "\x5b\x43",
+		"backward", "\x5b\x44",
+	)
+
 	commandString := "echo -n " + commands.Replace(command) + " > " + fifo
 	cmd := exec.Command("bash", "-c", commandString)
 	err := cmd.Run()

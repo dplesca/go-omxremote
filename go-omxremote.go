@@ -119,6 +119,16 @@ func stopVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "1")
 }
 
+func toggleSubsVideo(c web.C, w http.ResponseWriter, r *http.Request) {
+
+	err := sendCommand("subs")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	fmt.Fprintf(w, "1")
+}
+
 func sendCommand(command string) error {
 	commandString := "echo -n " + commands.Replace(command) + " > " + fifo
 	cmd := exec.Command("bash", "-c", commandString)
@@ -137,6 +147,7 @@ func main() {
 	goji.Post("/file/:name/play", togglePlayVideo)
 	goji.Post("/file/:name/pause", togglePlayVideo)
 	goji.Post("/file/:name/stop", stopVideo)
+	goji.Post("/file/:name/subs", toggleSubsVideo)
 
 	goji.Handle("/assets/*", http.FileServer(FS(false)))
 

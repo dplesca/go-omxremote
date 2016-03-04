@@ -19,6 +19,13 @@ import (
 
 const fifo string = "omxcontrol"
 
+var commands *strings.Replacer = strings.NewReplacer(
+	"play", "p",
+	"pause", "p",
+	"subs", "m",
+	"quit", "q",
+)
+
 var videosPath string
 
 type Page struct {
@@ -80,7 +87,11 @@ func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	exec.Command("bash", "-c", "echo . > "+fifo).Run()
+	startErr := exec.Command("bash", "-c", "echo . > "+fifo).Run()
+	if startErr != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 	err = cmd.Wait()
 
 	fmt.Fprintf(w, "%s", string_filename)
@@ -88,19 +99,31 @@ func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 
 func togglePlayVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 
-	cmd := exec.Command("bash", "-c", "echo -n p > "+fifo)
-	cmd.Run()
-
+	err := sendCommand("play")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 	fmt.Fprintf(w, "1")
 }
 
 func stopVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 
-	cmd := exec.Command("bash", "-c", "echo -n q > "+fifo)
-	cmd.Run()
+	err := sendCommand("quit")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 	os.Remove(fifo)
 
 	fmt.Fprintf(w, "1")
+}
+
+func sendCommand(command string) error {
+	commandString := "echo -n " + commands.Replace(command) + " > " + fifo
+	cmd := exec.Command("bash", "-c", commandString)
+	err := cmd.Run()
+	return err
 }
 
 func main() {

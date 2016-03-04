@@ -348,6 +348,18 @@ SUyavC/OcqmyEMY1ovEoJrb7mMLneEKv/wcAAP//bvKzF3gPAAA=
 `,
 	},
 
+	"/assets/manifest.json": {
+		local:   "assets/manifest.json",
+		size:    251,
+		modtime: 1457100377,
+		compressed: `
+H4sIAAAJbogA/3SOQWrEMAxF1x2YOxit6w6TxUyTq5RSRGISQWwZSQWnJXev3Qa6moU2/u+/7+/z6QkS
+xgCDg5k9xyIhsgV4bokuLPbxOJ9I84obDKCGacKV05GwUEiGRpxaNVePIJnPQhFl+4No5KQwvLVf1DEZ
+G4qqwfRi/Dku/pe4VLUwTf7/zV/7W6n3ktPcXM65ZqCvoM1x78q9cxXpb+7avZZ67mhA3drfz6f9JwAA
+//+meqf/+wAAAA==
+`,
+	},
+
 	"/assets/react.dom.min.js": {
 		local:   "assets/react.dom.min.js",
 		size:    706,
@@ -1491,17 +1503,17 @@ AP//3EHDSdUcAAA=
 
 	"/views/index.html": {
 		local:   "views/index.html",
-		size:    894,
-		modtime: 1456987527,
+		size:    853,
+		modtime: 1457100427,
 		compressed: `
-H4sIAAAJbogA/4yTz24TMRDGz63UdzC+bKpm1wlUEYV1kIAicaKiBYmjsSdZg/+s7EmazdNjOyWFPVQ9
-WF57ft/nGY+3ffHxy4e7HzfXpENrlmenbZ6JEW7NKThadkCoNJ+0FlAQ2YkQATn9dvepfk1LADUaWHq7
-C2A9QssOG0eNExY43Wq4731ASqR3CC553GuFHVew1RLqspgS7TRqYeoohQE+P5xgtPtNAhhOdRJTEvUe
-Iqfzq5e7NCjpAqw4FTFlFhn6jezqDEYmnApeq/pxr55fLZJo0fRuPTYXfW/gH/Yp4xFaz+eXuzRGtkVf
-MbZKJcdm7f3agOh1bKS3TMb4biWsNgO/9Zsg4eJWuHhxE/yby9ls+iqNxWxWldyqiIOB2AFgRXDogVcI
-O8we1aiKR3KUfwk0SVH6yh4a2/70asiz0lsiTWI5zR0S2kE4lJIjWpX7ocuWpeXyJDvkj7PT9BVl0D2S
-GOTxsABCYmO1a37FLDogy6dg5e1zBavNfj88BxTGjLEjmGvbikBUeraEk68lCZlyQbg2YNMTnXzXCnw8
-f5vIQziAUxAmWTIlystNxpo14IPi/fBZTap0UdV5Vv1/LPt71az8bn8CAAD//wU/7Kd+AwAA
+H4sIAAAJbogA/4xTTW8TMRA9t1L/g/FlUzW7TkSFEKyDBBSJExUtSByNPdk1+GNlT9Jsfz22t01hD6gH
+a+yZ9+bj2W5ffPzy4fbH9RXp0ZrN2WmbLTHCdZyCo8UDQiV70lpAQWQvQgTk9Nvtp/o1LQHUaGDj7SGA
+9QgtmxxHjhMWON1ruBt8QEqkdwgu5bjTCnuuYK8l1OWwJNpp1MLUUQoDfD1VMNr9JgEMp1Y4vYWYsvQB
+tpyKmLqJ7NHd/IrezTliGAzU6Heyr3UqPuM+BSKbQ+v1+vKQVjO47q+0hV8xtk2TxKbzvjMgBh0b6S2T
+Mb7bCqvNyG/8Lki4uBEuXlwH/+ZytVq+TOvValWV3qqIo4HYA2BFcByAVwgHzDmq2RRPyFn/JdAkRrku
+9nBf7U+vxmyV3hNpEpbTLLzQDsI0So5oVfShm5al4+YkZ8ibs9O0izLoAUkM8lgsgJDYWO2S0pk0QTb/
+Aytvn0vY7u7vx+cAhTFz2BGYZ9uLQFR6jYSTr6UJmXpBuDJg08tbfNcKfDx/m5BTOIBTEBaZsiTKy12G
+NR3gA+P9+FktqiRUdZ5Z/5Zlj1Kz8ov+BAAA//+DpPEJVQMAAA==
 `,
 	},
 

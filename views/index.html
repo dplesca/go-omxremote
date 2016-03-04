@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>omxremote</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="manifest" href="assets/manifest.json">
+	<link rel="apple-touch-icon" href="assets/touch-icons/apple-touch-icon-114x114.png">
+	<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="container">
+	<div id="app"></div>	
+</div>
+
+<script src="assets/react.min.js"></script>
+<script src="assets/react.dom.min.js"></script>
+<script src="assets/fuzzy.js"></script>
+<script src="assets/all.js"></script>
+
+<script>
+	var demo = React.createElement(Videos);
+	React.render(demo, document.getElementById('app'));
+</script>
+
+</body>
+</html>

@@ -71,6 +71,10 @@ func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 	)
 	escapedPath := escapePathReplacer.Replace(string_filename)
 
+	if _, err := os.Stat(fifo); err == nil {
+		os.Remove(fifo)
+	}
+
 	fifo_cmd := exec.Command("mkfifo", fifo)
 	fifo_cmd.Run()
 

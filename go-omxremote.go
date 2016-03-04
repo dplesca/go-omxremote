@@ -101,7 +101,7 @@ func togglePlayVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	fmt.Fprintf(w, "1")
+	w.WriteHeader(http.StatusOK)
 }
 
 func stopVideo(c web.C, w http.ResponseWriter, r *http.Request) {
@@ -113,7 +113,7 @@ func stopVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 	os.Remove(fifo)
 
-	fmt.Fprintf(w, "1")
+	w.WriteHeader(http.StatusOK)
 }
 
 func toggleSubsVideo(c web.C, w http.ResponseWriter, r *http.Request) {
@@ -123,7 +123,7 @@ func toggleSubsVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	fmt.Fprintf(w, "1")
+	w.WriteHeader(http.StatusOK)
 }
 
 func forwardVideo(c web.C, w http.ResponseWriter, r *http.Request) {
@@ -133,7 +133,7 @@ func forwardVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	fmt.Fprintf(w, "1")
+	w.WriteHeader(http.StatusOK)
 }
 
 func backwardVideo(c web.C, w http.ResponseWriter, r *http.Request) {
@@ -143,7 +143,7 @@ func backwardVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	fmt.Fprintf(w, "1")
+	w.WriteHeader(http.StatusOK)
 }
 
 func sendCommand(command string) error {

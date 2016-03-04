@@ -140,6 +140,16 @@ func forwardVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "1")
 }
 
+func backwardVideo(c web.C, w http.ResponseWriter, r *http.Request) {
+
+	err := sendCommand("backward")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	fmt.Fprintf(w, "1")
+}
+
 func sendCommand(command string) error {
 	commandString := "echo -n " + commands.Replace(command) + " > " + fifo
 	cmd := exec.Command("bash", "-c", commandString)
@@ -160,6 +170,7 @@ func main() {
 	goji.Post("/file/:name/stop", stopVideo)
 	goji.Post("/file/:name/subs", toggleSubsVideo)
 	goji.Post("/file/:name/forward", forwardVideo)
+	goji.Post("/file/:name/backward", backwardVideo)
 
 	goji.Handle("/assets/*", http.FileServer(FS(false)))
 

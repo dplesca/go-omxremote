@@ -28,7 +28,7 @@ var Videos = React.createClass({
 		var results = this.state.Files;
 		return (
 			<div className="row">
-				<h3>omxremote</h3>
+				<h3>go-omxremote</h3>
 				<SearchBar searchText={this.state.SearchText} onUserInput={this.handleUserInput} />
 				{results.map(function(result) {
 					if ( fuzzy.test(this.SearchText.toLowerCase(), result.file.toLowerCase()) ){

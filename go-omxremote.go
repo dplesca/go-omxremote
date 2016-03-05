@@ -31,7 +31,7 @@ type Video struct {
 }
 
 func home(c web.C, w http.ResponseWriter, r *http.Request) {
-	p := &Page{Title: "gomxremote"}
+	p := &Page{Title: "go-omxremote"}
 	tmpl, err := FSString(false, "/views/index.html")
 	if err != nil {
 		fmt.Println(err.Error())

@@ -1,6 +1,6 @@
 #go-omxremote
 
-Control raspberry pi omxplayer from the browser (including mobile browsers). To install just [download the executable](https://github.com/dplesca/go-omxremote/releases/download/v1.0/go-omxremote) and run it. For help run it with the `-h` flag. Example usage:
+Control raspberry pi omxplayer from the browser (including mobile browsers). To install just [download the executable](https://github.com/dplesca/go-omxremote/releases/download/v1.0/go-omxremote) and run it. For help run it with the `-h` flag. Example usage (you can of course add in your path):
 
 `./go-omxremote -bind :some-port -media path/to/video/files`
 
@@ -33,7 +33,7 @@ Generate react components file with babel:
 
 Generate assets file using esc:  
 
-`esc assets views -o assets.go`
+`esc -o assets.go assets views`
 
 Build again:
 

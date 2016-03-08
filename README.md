@@ -1,6 +1,6 @@
 #go-omxremote
 
-Control raspberry pi omxplayer from the browser (including mobile browsers). To install just [download the executable](https://github.com/dplesca/go-omxremote/releases/download/v1.0/go-omxremote) and run it. For help run it with the `-h` flag. Example usage (you can of course add in your path):
+Control raspberry pi omxplayer from the browser (including mobile browsers). To install just [download the executable](https://github.com/dplesca/go-omxremote/releases/download/v1.1/go-omxremote) and run it. For help run it with the `-h` flag. Example usage (you can of course add in your path):
 
 `./go-omxremote -bind :some-port -media path/to/video/files`
 

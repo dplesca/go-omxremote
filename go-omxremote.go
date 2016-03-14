@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/base64"
 	"encoding/json"
 	"flag"
@@ -57,6 +58,8 @@ func videoFiles(c web.C, w http.ResponseWriter, r *http.Request) {
 }
 
 func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
+	var buf bytes.Buffer
+
 	filename, _ := base64.StdEncoding.DecodeString(c.URLParams["name"])
 	string_filename := string(filename[:])
 	escapePathReplacer := strings.NewReplacer(
@@ -83,6 +86,10 @@ func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	buf.Write([]byte{'\033', '[', '3', '4', ';', '1', 'm'})
+	fmt.Fprintf(&buf, "%s", string_filename)
+	log.Print(buf.String())
 
 	startErr := exec.Command("bash", "-c", "echo . > "+fifo).Run()
 	if startErr != nil {

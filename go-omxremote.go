@@ -98,7 +98,7 @@ func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 	err = cmd.Wait()
 
-	fmt.Fprintf(w, "%s", string_filename)
+	w.WriteHeader(http.StatusOK)
 }
 
 func togglePlayVideo(c web.C, w http.ResponseWriter, r *http.Request) {

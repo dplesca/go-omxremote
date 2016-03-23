@@ -135,6 +135,6 @@ func main() {
 	router.POST("/start/:name", Start)
 	router.POST("/file/:name/:command", SendCommand)
 
-	router.ServeFiles("/assets/*filepath", http.Dir("./assets"))
+	router.ServeFiles("/assets/*filepath", FS(false))
 	log.Fatal(http.ListenAndServe(bindAddr, router))
 }

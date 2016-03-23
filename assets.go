@@ -186,34 +186,34 @@ func FSMustString(useLocal bool, name string) string {
 
 var _escData = map[string]*_escFile{
 
-	"/assets/all.js": {
+	"/all.js": {
 		local:   "assets/all.js",
-		size:    3857,
-		modtime: 1457178846,
+		size:    3916,
+		modtime: 1458755441,
 		compressed: `
-H4sIAAAJbogA/8xWW2/bNhR+76/wOKCwUNotdnlxoIc2a5YM6QVJOgwY9sBIR5EWmtRIKo4r6L/vkNSF
-dqQ4AYZiT5alc/++85F3TM2OpTBKch1fAEvMMlHADBxzpvW8Tgtdcrb9yNawIp0hoTkTKUebIrldZZVI
-TCHFHKIalqWCOxDmF8hYxc08Onr7N7u/gH8q0GYOS8PUDZhlriCj5POnyysSNVSBSEENgaLalnXNktvz
-QtzG5HVWcHhNXpm80JhAlnqZM52/Iq+tzYaplNBMKvtwyKE1I7RklYZD1s6IHCkwlRKzcDzvOayxzTlJ
-iztC68ROyw8p6YbU0DGHk4rzt65NWvvfFbnEqRhCv1ycr4j2z6dYwGqvoCYajfiwBCU3E9kf2koBC8yj
-0lkiebUWU44M3aTwiLu6AgrQIN51ZYwUs2qRYaOLTZGa3CGJnEHMVx2oE1mK3eIKHObCeWPvZPbOPkVP
-ncK36MwTxLfWM+oZvXl/19xn9/i/6q5fFtdfsGENJSf+34w8vdkuXBNFE22OLceVvLnhMLusrnW3Iu7x
-GRsyvnOy7FfOPo7Hi5omOnph5WgIclAnB9Nvo5R8SsZOvYztvMOWqQfblR6PIv/AwwLY2jss9w2ep5GP
-CBTbsQwKpZMsduzkT128vhMkS9CDxyvA+xKYSvJ3TB2Eu7fs0cafGwjgtjhHdZBNii8a1JkoK+O/dnDf
-MV7BKNDPGrB2JS3sWcQKAWpq2oWtAF3NtkQvA/f4BxtLIJfc5m8DkVApQqIQ6goO98Z7XGEoanEhyEoD
-yv4/88lw/H4+IZDuTbhuvxcpyIOjd1aE4uTORGEKxvEoNTAytlrncnMBGjdNrzLGNTRNz6gDe1lkc1eq
-trGXQaAWUg3GpZ2PJIkawJ/ZY4ZGVdZuarm7+8RjZSRjN7gO5O7WRut8VOLaCvsYAtFtDrPtFrb7sUKW
-3DlkJmiX/0yoTTMtAW6nyfdkd+vbP024uFb18Djpyt9j0OFLrTdDhst1iYcqAl+kH2QlzD4QJmcmtol3
-hNrLLvqTX99f4TW081GgMZwGyxFmAujJibNf/Xb56eOyZErDYEtbLbHbQlbe0aE9vEa8UB6eQPguz59/
-7UYlBKnmt67XoMF/2NYH5O4CBiR0b3bDDwGayfNKed7G+5H+s0Mk/7HlF7mRC7m+V7CWBi9Xo9a9fNN6
-0K6wy6E9Guh2KF/9SzxT2uaWa1bOQzbgy6jGHc6qr1+3S2O54yIM0ZdGnssNqGOGnOgCOX7vfokePQwc
-n9tdb0O43bRxVkFMJzlDl156LToBu+O+gUpxugaTy5QmjHN7J/dY3q95bkwZC9jM/vhwforPrfNR+wm3
-FgtMty5N4oQ+DgjRyZqzcVSL4/inly/70iodxz+8eeMsu9zfxXGFzMrwbEuj7mUXxy+T43DTDFWUIOZt
-C7YbK7tR/1UjUedRc/Ti3wAAAP//qagNWREPAAA=
+H4sIAAAJbogA/8xWbW/bNhD+3l/hcUBhobRT7OWLA2Fos2bJkL4gSYcBwz4w0jnSQpMaScVJBf33HUm9
+UI4UJ8BQ9JNp6u54z91zD3nL1OxICqMk1/E5sMQsEwXMwBFnWs+rNNcFZ/cf2AZWpDUkNGMi5WiTJzer
+dSkSk0sxh6iCZaHgFoT5Fdas5GYeHb75h92dw78laDOHpWHqGswyU7Cm5NPHi0sS1VSBSEH1gaLKpnXF
+kpuzXNzE5GCdczggr0yWazxAFnqZMZ29IgfWZstUSuhaKrvY59CYEVqwUsM+a2dEDhWYUolZWJ53HDYI
+c07S/JbQKrHV8kVK2iLVdMzhuOT8jYNJK/+7IhdYFUPo5/OzFdF+fYIJrHYSqqPRiA9TUHI7cfpDWylg
+geeodJZIXm7ElCNDNyl8x11eAQVoEO+qNEaKWblYI9DFNk9N5jqJnMGer9qmTpySD5PLsZgL543Yyeyt
+XUVPrcLXQOYJ4qF1jHoGNu/vwH1yy28KXTcsDl8wYTUlx/7fjDwdbBuujqIJmGPDcSmvrznMLsor3Y6I
+Wz5jQsZnThbdyNnleLyorqPDF1aO+iB7dbI3/TpKya2MBakjqjhulOSX4T6K2kDoHOoxBTzxCjjYQ3/q
+eeJQx6OkeeBhe9/YOxrsGjxPXh/RNjawDBKlkwPgiM2fOrMdEuRZgMG3OqDKBTCVZG+Z2suUzrIjCv5c
+Q8AUS5GoCk6T4rMGdSqK0vivLVNuGS9hlCPPKrB2KS3sNcZyAWqq2rnNAF3NfYFeBu7wDwJLIJPcnt8E
+IqHIhEQh1CUcjpz3uMRQ1PaFICsNKPv/1B+G5ff1CRvpdsJJ/SNPQe4tvbMiFCt3KnKTM463sIGRslU6
+k9tz0DikerVmXENdd4zaM9L5eu5S1Tb2MgjUtFSDccfORw6JasCf2WOGRpXWbkoX2qfIY2kkY4+/tsnt
+g49W2ag6Nhl2MQR2t97Pthu4340VsuTWdWaCdtnPhNpjpiXAzTT5ngynvvlTh4NrVQ9vojb9HQbtfw97
+M2S43BR4H2Pj8/S9LIXZbYTJmHECPdB4L7voT357d4kv2NZHgcZwGixHmAlaT46d/er3i48flgVTGnpb
+2miJnRay8o6u2/029gvl4QmEb8/56+9hVEKQan7qOg3q/ftpfUDuNmBAQrczDN8HqCevOuV5G+9G+t8u
+kezHhl/kWi7k5k7BRhp8l41ad/JNq167QpQ9PBrodihf3SbeKQ245YYV85ANuBlVOMPr8suX+6Wx3HER
++uhLI8/kFtQRQ060gRy/h1+iRy8Dx+dm1psQbjZtnFUQ00lOj9JLr+1OwO64A1AqTjdgMpnShHFun/O+
+l3cbnhlTxAK2sz/fn53gunE+bD7h1GKC6b07JnFCHweEaGXN2TiqxXH808uXXWqljuMfXr92lu3Z38Vx
+icxa492WRu1mG8cPk+NwXfdZFCDmDQSLxspu1H3VSNR5VB+++C8AAP//MAkSJEwPAAA=
 `,
 	},
 
-	"/assets/fonts/icomoon.eot": {
+	"/fonts/icomoon.eot": {
 		local:   "assets/fonts/icomoon.eot",
 		size:    1840,
 		modtime: 1452028980,
@@ -239,7 +239,7 @@ XNP6zyYNt5K+oP0TAAD//1uDPzswBwAA
 `,
 	},
 
-	"/assets/fonts/icomoon.svg": {
+	"/fonts/icomoon.svg": {
 		local:   "assets/fonts/icomoon.svg",
 		size:    2189,
 		modtime: 1452028980,
@@ -264,7 +264,7 @@ jv9jAQXxlyR5+NxerPL4jV6Fb/vF/wEAAP//qaz+xY0IAAA=
 `,
 	},
 
-	"/assets/fonts/icomoon.ttf": {
+	"/fonts/icomoon.ttf": {
 		local:   "assets/fonts/icomoon.ttf",
 		size:    1676,
 		modtime: 1452028980,
@@ -289,7 +289,7 @@ aeqqozJxG8vkW8QOXa+qXLN+LurR/5O+YPwfAAD//8i6t56MBgAA
 `,
 	},
 
-	"/assets/fonts/icomoon.woff": {
+	"/fonts/icomoon.woff": {
 		local:   "assets/fonts/icomoon.woff",
 		size:    1752,
 		modtime: 1452028980,
@@ -314,7 +314,7 @@ Za0mVjYTF8v2IsoyUJR7t3D3CqZpyIpK6FuwitwKbOJ4UeZa9HJhjd6f9BXt3wAAAP//p7djP9gGAAA=
 `,
 	},
 
-	"/assets/fuzzy.js": {
+	"/fuzzy.js": {
 		local:   "assets/fuzzy.js",
 		size:    3960,
 		modtime: 1453066568,
@@ -348,7 +348,7 @@ SUyavC/OcqmyEMY1ovEoJrb7mMLneEKv/wcAAP//bvKzF3gPAAA=
 `,
 	},
 
-	"/assets/manifest.json": {
+	"/manifest.json": {
 		local:   "assets/manifest.json",
 		size:    251,
 		modtime: 1457100377,
@@ -360,7 +360,7 @@ G4qqwfRi/Dku/pe4VLUwTf7/zV/7W6n3ktPcXM65ZqCvoM1x78q9cxXpb+7avZZ67mhA3drfz6f9JwAA
 `,
 	},
 
-	"/assets/react.dom.min.js": {
+	"/react.dom.min.js": {
 		local:   "assets/react.dom.min.js",
 		size:    706,
 		modtime: 1452030334,
@@ -376,7 +376,7 @@ rP83AAD//7NOvZTCAgAA
 `,
 	},
 
-	"/assets/react.min.js": {
+	"/react.min.js": {
 		local:   "assets/react.min.js",
 		size:    135528,
 		modtime: 1452030248,
@@ -1043,7 +1043,7 @@ KyHKwUsv5JcRbnv4YWL4MOWbuB/DF6F1h8ututBe8sLbW9WUQxx15Ms07PjFgvPuhd/q+gu//38CAAD/
 `,
 	},
 
-	"/assets/style.css": {
+	"/style.css": {
 		local:   "assets/style.css",
 		size:    9602,
 		modtime: 1456951114,
@@ -1099,7 +1099,7 @@ XsLfWviqkl7Cvx7xhyJ7CX1noYsidxF9b6ED3gnVyUWKG03x3wAAAP//QfXzv4IlAAA=
 `,
 	},
 
-	"/assets/touch-icons/android-touch-icon-196x196.png": {
+	"/touch-icons/android-touch-icon-196x196.png": {
 		local:   "assets/touch-icons/android-touch-icon-196x196.png",
 		size:    16228,
 		modtime: 1451930646,
@@ -1373,7 +1373,7 @@ ZXKC+wqZ/+S9y0goileIGgb8fwEAAP//5+16jGQ/AAA=
 `,
 	},
 
-	"/assets/touch-icons/apple-touch-icon-114x114.png": {
+	"/touch-icons/apple-touch-icon-114x114.png": {
 		local:   "assets/touch-icons/apple-touch-icon-114x114.png",
 		size:    7381,
 		modtime: 1451930646,
@@ -1520,26 +1520,21 @@ AwAA
 
 	"/": {
 		isDir: true,
-		local: "/",
+		local: "assets",
 	},
 
-	"/assets": {
+	"/fonts": {
 		isDir: true,
-		local: "/assets",
+		local: "assets/fonts",
 	},
 
-	"/assets/fonts": {
+	"/touch-icons": {
 		isDir: true,
-		local: "/assets/fonts",
-	},
-
-	"/assets/touch-icons": {
-		isDir: true,
-		local: "/assets/touch-icons",
+		local: "assets/touch-icons",
 	},
 
 	"/views": {
 		isDir: true,
-		local: "/views",
+		local: "assets/views",
 	},
 }

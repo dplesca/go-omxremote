@@ -14,8 +14,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/zenazn/goji"
-	"github.com/zenazn/goji/web"
+	"github.com/julienschmidt/httprouter"
 )
 
 const fifo string = "omxcontrol"
@@ -31,7 +30,7 @@ type Video struct {
 	Hash string `json:"hash"`
 }
 
-func home(c web.C, w http.ResponseWriter, r *http.Request) {
+func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	p := &Page{Title: "go-omxremote"}
 	tmpl, err := FSString(false, "/views/index.html")
 	if err != nil {
@@ -42,7 +41,7 @@ func home(c web.C, w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, p)
 }
 
-func videoFiles(c web.C, w http.ResponseWriter, r *http.Request) {
+func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var files []*Video
 	var root = videosPath
 	_ = filepath.Walk(root, func(path string, f os.FileInfo, _ error) error {
@@ -57,10 +56,10 @@ func videoFiles(c web.C, w http.ResponseWriter, r *http.Request) {
 	encoder.Encode(files)
 }
 
-func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
+func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var buf bytes.Buffer
 
-	filename, _ := base64.StdEncoding.DecodeString(c.URLParams["name"])
+	filename, _ := base64.StdEncoding.DecodeString(ps.ByName("name"))
 	string_filename := string(filename[:])
 	escapePathReplacer := strings.NewReplacer(
 		"[", "\\[",
@@ -101,59 +100,33 @@ func startVideo(c web.C, w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func togglePlayVideo(c web.C, w http.ResponseWriter, r *http.Request) {
-
-	err := sendCommand("play")
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
+func TogglePlay(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	sendCommand("play", w)
 	w.WriteHeader(http.StatusOK)
 }
 
-func stopVideo(c web.C, w http.ResponseWriter, r *http.Request) {
-
-	err := sendCommand("quit")
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
+func Stop(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	sendCommand("quit", w)
 	os.Remove(fifo)
-
 	w.WriteHeader(http.StatusOK)
 }
 
-func toggleSubsVideo(c web.C, w http.ResponseWriter, r *http.Request) {
-
-	err := sendCommand("subs")
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
+func ToggleSubs(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	sendCommand("subs", w)
 	w.WriteHeader(http.StatusOK)
 }
 
-func forwardVideo(c web.C, w http.ResponseWriter, r *http.Request) {
-
-	err := sendCommand("forward")
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
+func Forward(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	sendCommand("forward", w)
 	w.WriteHeader(http.StatusOK)
 }
 
-func backwardVideo(c web.C, w http.ResponseWriter, r *http.Request) {
-
-	err := sendCommand("backward")
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
+func Backward(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	sendCommand("backward", w)
 	w.WriteHeader(http.StatusOK)
 }
 
-func sendCommand(command string) error {
+func sendCommand(command string, w http.ResponseWriter) {
 	commands := strings.NewReplacer(
 		"play", "p",
 		"pause", "p",
@@ -166,25 +139,27 @@ func sendCommand(command string) error {
 	commandString := "echo -n " + commands.Replace(command) + " > " + fifo
 	cmd := exec.Command("bash", "-c", commandString)
 	err := cmd.Run()
-	return err
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func main() {
-
 	flag.StringVar(&videosPath, "media", ".", "path to look for videos in")
 
-	goji.Get("/", home)
-	goji.Get("/files", videoFiles)
+	router := httprouter.New()
+	router.GET("/", Index)
+	router.GET("/files", List)
 
-	goji.Post("/file/:name/start", startVideo)
-	goji.Post("/file/:name/play", togglePlayVideo)
-	goji.Post("/file/:name/pause", togglePlayVideo)
-	goji.Post("/file/:name/stop", stopVideo)
-	goji.Post("/file/:name/subs", toggleSubsVideo)
-	goji.Post("/file/:name/forward", forwardVideo)
-	goji.Post("/file/:name/backward", backwardVideo)
+	router.POST("/file/:name/start", Start)
+	router.POST("/file/:name/play", TogglePlay)
+	router.POST("/file/:name/pause", TogglePlay)
+	router.POST("/file/:name/stop", Stop)
+	router.POST("/file/:name/subs", ToggleSubs)
+	router.POST("/file/:name/forward", Forward)
+	router.POST("/file/:name/backward", Backward)
 
-	goji.Handle("/assets/*", http.FileServer(FS(false)))
-
-	goji.Serve()
+	router.ServeFiles("/assets/*filepath", http.Dir("./assets"))
+	log.Fatal(http.ListenAndServe(":8080", router))
 }

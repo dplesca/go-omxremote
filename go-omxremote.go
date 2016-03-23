@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/base64"
 	"encoding/json"
 	"flag"
@@ -13,13 +12,16 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"time"
 
+	"github.com/fatih/color"
 	"github.com/julienschmidt/httprouter"
 )
 
 const fifo string = "omxcontrol"
 
 var videosPath string
+var bindAddr string
 
 type Page struct {
 	Title string
@@ -57,8 +59,6 @@ func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 }
 
 func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var buf bytes.Buffer
-
 	filename, _ := base64.StdEncoding.DecodeString(ps.ByName("name"))
 	string_filename := string(filename[:])
 	escapePathReplacer := strings.NewReplacer(
@@ -86,10 +86,9 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		log.Fatal(err)
 	}
 
-	buf.Write([]byte{'\033', '[', '3', '4', ';', '1', 'm'})
-	fmt.Fprintf(&buf, "%s", string_filename)
-	log.Print(buf.String())
+	color.Green("Playing media file: %s\n", string_filename)
 
+	startTime := time.Now()
 	startErr := exec.Command("bash", "-c", "echo . > "+fifo).Run()
 	if startErr != nil {
 		http.Error(w, err.Error(), 500)
@@ -97,69 +96,45 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 	err = cmd.Wait()
 
-	w.WriteHeader(http.StatusOK)
-}
-
-func TogglePlay(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	sendCommand("play", w)
-	w.WriteHeader(http.StatusOK)
-}
-
-func Stop(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	sendCommand("quit", w)
+	color.Red("Stopped media file: %s after %s\n", string_filename, time.Since(startTime))
 	os.Remove(fifo)
+
 	w.WriteHeader(http.StatusOK)
 }
 
-func ToggleSubs(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	sendCommand("subs", w)
-	w.WriteHeader(http.StatusOK)
-}
-
-func Forward(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	sendCommand("forward", w)
-	w.WriteHeader(http.StatusOK)
-}
-
-func Backward(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	sendCommand("backward", w)
-	w.WriteHeader(http.StatusOK)
-}
-
-func sendCommand(command string, w http.ResponseWriter) {
+func SendCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	commands := strings.NewReplacer(
 		"play", "p",
 		"pause", "p",
 		"subs", "m",
-		"quit", "q",
+		"stop", "q",
 		"forward", "\x5b\x43",
 		"backward", "\x5b\x44",
 	)
 
-	commandString := "echo -n " + commands.Replace(command) + " > " + fifo
+	commandString := "echo -n " + commands.Replace(ps.ByName("command")) + " > " + fifo
 	cmd := exec.Command("bash", "-c", commandString)
 	err := cmd.Run()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	w.WriteHeader(http.StatusOK)
 }
 
 func main() {
-	flag.StringVar(&videosPath, "media", ".", "path to look for videos in")
+	flag.StringVar(&videosPath, "media", ".", "Path to look for videos in")
+	flag.StringVar(&bindAddr, "bind", ":31415", "Address to bind on.")
+	flag.Parse()
 
 	router := httprouter.New()
 	router.GET("/", Index)
 	router.GET("/files", List)
 
-	router.POST("/file/:name/start", Start)
-	router.POST("/file/:name/play", TogglePlay)
-	router.POST("/file/:name/pause", TogglePlay)
-	router.POST("/file/:name/stop", Stop)
-	router.POST("/file/:name/subs", ToggleSubs)
-	router.POST("/file/:name/forward", Forward)
-	router.POST("/file/:name/backward", Backward)
+	router.POST("/start/:name", Start)
+	router.POST("/file/:name/:command", SendCommand)
 
 	router.ServeFiles("/assets/*filepath", http.Dir("./assets"))
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(bindAddr, router))
 }

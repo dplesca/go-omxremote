@@ -5,7 +5,7 @@ var FullAction = React.createClass({
     },
 
 	render: function() {
-		var link = "/file/" + this.props.Hash + "/" + this.props.URL,
+		var link = this.props.URL == "start" ? this.props.URL + "/" + this.props.Hash : "/file/" + this.props.Hash + "/" + this.props.URL,
 			buttonClass = "button u-full-width " + this.props.URL,
 			iconClass= "icon-" + this.props.URL;
 		return (

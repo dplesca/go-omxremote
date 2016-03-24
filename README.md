@@ -9,16 +9,8 @@ Command flags:
 ```
 -bind string
     Address to bind on. If this value has a colon, as in ":8000" or
-            "127.0.0.1:9001", it will be treated as a TCP address. If it
-            begins with a "/" or a ".", it will be treated as a path to a
-            UNIX socket. If it begins with the string "fd@", as in "fd@3",
-            it will be treated as a file descriptor (useful for use with
-            systemd, for instance). If it begins with the string "einhorn@",
-            as in "einhorn@0", the corresponding einhorn socket will be
-            used. If an option is not explicitly passed, the implementation
-            will automatically select among "einhorn@0" (Einhorn), "fd@3"
-            (systemd), and ":8000" (fallback) based on its environment. 
-            (default ":8000")
+            "127.0.0.1:9001", it will be treated as a TCP address.
+            (default ":31415")
 -media string
     path to look for videos in (default ".")
 ```

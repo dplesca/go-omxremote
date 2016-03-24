@@ -33,7 +33,7 @@ Generate react components file with babel:
 
 Generate assets file using esc:  
 
-`esc -o assets.go assets views`
+`esc -o assets.go -prefix="assets" assets views`
 
 Build again:
 
@@ -41,7 +41,7 @@ Build again:
 
 ###Credits
 
-It's written in go, uses [goji](https://github.com/zenazn/goji) as a web framework and [esc](https://github.com/mjibson/esc) to generate and embed assets in go source files. The front-end is written in [react](http://facebook.github.io/react/), the style uses [skeleton](http://getskeleton.com/).
+It's written in go, uses [httprouter](https://github.com/julienschmidt/httprouter) as a router, [color](https://github.com/fatih/color) for colorized output and [esc](https://github.com/mjibson/esc) to generate and embed assets in go source files. The front-end is written in [react](http://facebook.github.io/react/), the style uses [skeleton](http://getskeleton.com/).
 
 ###Screenshot
 

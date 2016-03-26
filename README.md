@@ -23,7 +23,7 @@ Generate react components file with babel:
 
 `babel --presets react components/ --minified -o assets/all.js`
 
-Generate assets file using esc:  
+Generate assets file using [esc](https://github.com/mjibson/esc):  
 
 `esc -o assets.go -prefix="assets" assets views`
 

@@ -9,19 +9,16 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
 	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/fatih/color"
 	"github.com/julienschmidt/httprouter"
 )
 
-const fifo string = "omxcontrol"
-
 var videosPath string
 var bindAddr string
+var p Player
 
 type Page struct {
 	Title string
@@ -61,65 +58,30 @@ func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	filename, _ := base64.StdEncoding.DecodeString(ps.ByName("name"))
 	string_filename := string(filename[:])
-	escapePathReplacer := strings.NewReplacer(
-		"[", "\\[",
-		"]", "\\]",
-		"(", "\\(",
-		")", "\\)",
-		"'", "\\'",
-		" ", "\\ ",
-		"*", "\\*",
-		"?", "\\?",
-	)
-	escapedPath := escapePathReplacer.Replace(string_filename)
 
-	if _, err := os.Stat(fifo); err == nil {
-		os.Remove(fifo)
-	}
-
-	fifo_cmd := exec.Command("mkfifo", fifo)
-	fifo_cmd.Run()
-
-	cmd := exec.Command("bash", "-c", "omxplayer -o hdmi "+escapedPath+" < "+fifo)
-	err := cmd.Start()
+	err := p.Start(string_filename)
 	if err != nil {
-		log.Fatal(err)
-	}
-
-	color.Green("Playing media file: %s\n", string_filename)
-
-	startTime := time.Now()
-	startErr := exec.Command("bash", "-c", "echo . > "+fifo).Run()
-	if startErr != nil {
+		p.Playing = false
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	err = cmd.Wait()
+
+	color.Green("Playing media file: %s\n", string_filename)
+	startTime := time.Now()
+	err = p.Command.Wait()
 
 	color.Red("Stopped media file: %s after %s\n", string_filename, time.Since(startTime))
-	os.Remove(fifo)
-
+	p.Playing = false
 	w.WriteHeader(http.StatusOK)
 }
 
 func SendCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	commands := strings.NewReplacer(
-		"play", "p",
-		"pause", "p",
-		"subs", "m",
-		"stop", "q",
-		"forward", "\x5b\x43",
-		"backward", "\x5b\x44",
-	)
-
-	commandString := "echo -n " + commands.Replace(ps.ByName("command")) + " > " + fifo
-	cmd := exec.Command("bash", "-c", commandString)
-	err := cmd.Run()
+	err := p.SendCommand(ps.ByName("command"))
 	if err != nil {
+		color.Red(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
 	w.WriteHeader(http.StatusOK)
 }
 

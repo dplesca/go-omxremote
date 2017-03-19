@@ -1,4 +1,4 @@
-#go-omxremote
+# go-omxremote
 
 Control raspberry pi omxplayer from the browser (including mobile browsers). To install just [download the executable](https://github.com/dplesca/go-omxremote/releases/download/v2.0/go-omxremote) and run it. For help run it with the `-h` flag. Example usage (you can of course add in your path):
 
@@ -17,7 +17,7 @@ Command flags:
 
 The project is geared towards mobile usage, it has been tested on both Android and iOS devices.
 
-###Modify it
+### Modify it
 
 Generate react components file with babel:  
 
@@ -31,10 +31,10 @@ Build again:
 
 `go build`
 
-###Credits
+### Credits
 
 It's written in go, uses [httprouter](https://github.com/julienschmidt/httprouter) as a router, [color](https://github.com/fatih/color) for colorized output and [esc](https://github.com/mjibson/esc) to generate and embed assets in go source files. The front-end is written in [react](http://facebook.github.io/react/), the style uses [skeleton](http://getskeleton.com/).
 
-###Screenshot
+### Screenshot
 
 ![Android](http://s10.postimg.org/6susaybqh/screen_p.png)

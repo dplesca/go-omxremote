@@ -17,6 +17,25 @@ Command flags:
 
 The project is geared towards mobile usage, it has been tested on both Android and iOS devices.
 
+### Example systemd unit file
+
+A minimal systemd unit file. It just make go-omxremote a service so you can control it between sessions and/or don't need a tmux/screen to keep it open.
+
+```
+[Unit]
+Description="omxremote go web service"
+
+[Service]
+User=pi
+Group=pi
+Restart=on-failure
+ExecStart=/usr/local/bin/go-omxremote -media /path/to/media/files
+WorkingDirectory=/home/pi
+
+[Install]
+WantedBy=multi-user.target
+```
+
 ### Modify it
 
 Generate react components file with babel:  

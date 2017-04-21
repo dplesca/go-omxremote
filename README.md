@@ -19,7 +19,7 @@ The project is geared towards mobile usage, it has been tested on both Android a
 
 ### Example systemd unit file
 
-A minimal systemd unit file. It just make go-omxremote a service so you can control it between sessions and/or don't need a tmux/screen to keep it open.
+A minimal systemd unit file. It makes `go-omxremote` a service so you can control it between sessions and/or don't need a tmux/screen to keep it open.
 
 ```
 [Unit]
@@ -37,10 +37,6 @@ WantedBy=multi-user.target
 ```
 
 ### Modify it
-
-Generate react components file with babel:  
-
-`babel --presets react components/ --minified -o assets/all.js`
 
 Generate assets file using [esc](https://github.com/mjibson/esc):  
 

@@ -26,7 +26,7 @@ Vue.component('video-file', {
 			</div>
 			<div class="controls" v-show="activecontrols">
 				<div class="tile">
-					<a class="button is-primary is-outlined is-fullwidth" @click="handleClick('play', $event)"><span class="icon"><i class="fa fa-play-circle-o"></i></span> <span>Play</span></a>
+					<a class="button is-primary is-outlined is-fullwidth" @click="handleClick('start', $event)"><span class="icon"><i class="fa fa-play-circle-o"></i></span> <span>Start</span></a>
 				</div>
 				<div class="tile is-mobile">
 					<div class="tile is-4"><a class="button is-fullwidth" @click="handleClick('backward', $event)"><span class="icon is-small"><i class="fa fa-backward"></i></span> <span>Back</span></a></div>
@@ -42,6 +42,9 @@ Vue.component('video-file', {
 		handleClick(action, ev){
 			ev.preventDefault();
 			let requestURL = "/file/" + this.video.hash + '/' + action;
+			if (action == "start"){
+				requestURL = "/start/" + this.video.hash;
+			}
 			nanoajax.ajax(
 				{ url: requestURL, method: 'POST' },
 				(code, responseText) => {

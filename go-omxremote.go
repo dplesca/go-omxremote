@@ -12,7 +12,6 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/fatih/color"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -66,11 +65,11 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 
-	color.Green("Playing media file: %s\n", string_filename)
+	log.Printf("Playing media file: %s\n", string_filename)
 	startTime := time.Now()
 	err = p.Command.Wait()
 
-	color.Red("Stopped media file: %s after %s\n", string_filename, time.Since(startTime))
+	log.Printf("Stopped media file: %s after %s\n", string_filename, time.Since(startTime))
 	p.Playing = false
 	w.WriteHeader(http.StatusOK)
 }
@@ -78,7 +77,7 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func SendCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	err := p.SendCommand(ps.ByName("command"))
 	if err != nil {
-		color.Red(err.Error())
+		log.Println(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

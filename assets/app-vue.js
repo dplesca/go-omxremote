@@ -18,64 +18,62 @@ se(ut),nt(ut);var Do=[String,RegExp],Mo={name:"keep-alive",abstract:!0,props:{in
 !function(){var e=this,t={};"undefined"!=typeof exports?module.exports=t:e.fuzzy=t,t.simpleFilter=function(e,r){return r.filter(function(r){return t.test(e,r)})},t.test=function(e,r){return null!==t.match(e,r)},t.match=function(e,t,r){r=r||{};var n,o=0,i=[],u=t.length,c=0,s=0,l=r.pre||"",a=r.post||"",f=r.caseSensitive&&t||t.toLowerCase();e=r.caseSensitive&&e||e.toLowerCase();for(var d=0;u>d;d++)n=t[d],f[d]===e[o]?(n=l+n+a,o+=1,s+=1+s):s=0,c+=s,i[i.length]=n;return o===e.length?{rendered:i.join(""),score:c}:null},t.filter=function(e,r,n){return r&&0!==r.length?"string"!=typeof e?r:(n=n||{},r.reduce(function(r,o,i){var u=o;n.extract&&(u=n.extract(o));var c=t.match(e,u,n);return null!=c&&(r[r.length]={string:c.rendered,score:c.score,index:i,original:o}),r},[]).sort(function(e,t){var r=t.score-e.score;return r?r:e.index-t.index})):[]}}();
 
 Vue.component('video-file', {
-    props: ['video', 'showresult'],
-    template: `
+	props: ['video', 'showresult'],
+	template: `
 		<div class="tile is-ancestor is-vertical box video" v-show="showresult">
-		    <div class="tile">
-		        <h3 class="title is-4" @click="activecontrols = !activecontrols;">{{video.file}}</h3>
-		    </div>
-		    <div class="controls" v-show="activecontrols">
-		        <div class="tile">
-		            <a class="button is-primary is-outlined is-fullwidth" @click="handleClick('play', $event)"><span class="icon"><i class="fa fa-play-circle-o"></i></span> <span>Play</span></a>
-		        </div>
-		        <div class="tile is-mobile">
-		            <div class="tile is-4"><a class="button is-fullwidth" @click="handleClick('backward', $event)"><span class="icon is-small"><i class="fa fa-backward"></i></span> <span>Back</span></a></div>
-		            <div class="tile is-4"><a class="button is-fullwidth is-info is-outlined" @click="handleClick('pause', $event)"><span class="icon"><i class="fa fa-pause-circle-o"></i></span> <span>Pause</span></a></div>
-		            <div class="tile is-4"><a class="button is-fullwidth" @click="handleClick('forward', $event)"><span class="icon is-small"><i class="fa fa-forward"></i></span> <span>Forward</span></a></div>
-		        </div>
-		        <div class="tile"><a class="button is-fullwidth" @click="handleClick('subs', $event)"><span class="icon is-small"><i class="fa fa-file-text-o"></i></span><span>Subs</span></a></div>
-		        <div class="tile"><a class="button is-primary is-danger is-fullwidth is-outlined" @click="handleClick('stop', $event)"><span class="icon"><i class="fa fa-stop-circle-o"></i></span> <span>Stop</span></a></div>
-		    </div>
+			<div class="tile">
+				<h3 class="title is-4" @click="activecontrols = !activecontrols;">{{video.file}}</h3>
+			</div>
+			<div class="controls" v-show="activecontrols">
+				<div class="tile">
+					<a class="button is-primary is-outlined is-fullwidth" @click="handleClick('play', $event)"><span class="icon"><i class="fa fa-play-circle-o"></i></span> <span>Play</span></a>
+				</div>
+				<div class="tile is-mobile">
+					<div class="tile is-4"><a class="button is-fullwidth" @click="handleClick('backward', $event)"><span class="icon is-small"><i class="fa fa-backward"></i></span> <span>Back</span></a></div>
+					<div class="tile is-4"><a class="button is-fullwidth is-info is-outlined" @click="handleClick('pause', $event)"><span class="icon"><i class="fa fa-pause-circle-o"></i></span> <span>Pause</span></a></div>
+					<div class="tile is-4"><a class="button is-fullwidth" @click="handleClick('forward', $event)"><span class="icon is-small"><i class="fa fa-forward"></i></span> <span>Forward</span></a></div>
+				</div>
+				<div class="tile"><a class="button is-fullwidth" @click="handleClick('subs', $event)"><span class="icon is-small"><i class="fa fa-file-text-o"></i></span><span>Subs</span></a></div>
+				<div class="tile"><a class="button is-primary is-danger is-fullwidth is-outlined" @click="handleClick('stop', $event)"><span class="icon"><i class="fa fa-stop-circle-o"></i></span> <span>Stop</span></a></div>
+			</div>
 		</div>
 	`,
 	methods: {
-		handleClick: function(action, ev){
+		handleClick(action, ev){
 			ev.preventDefault();
 			let requestURL = "/file/" + this.video.hash + '/' + action;
 			nanoajax.ajax(
-	    		{ url: requestURL, method: 'POST' },
-	    		function (code, responseText) {
-	    			console.log(JSON.parse(responseText));
+				{ url: requestURL, method: 'POST' },
+				(code, responseText) => {
+					console.log(JSON.parse(responseText));
 			})
 		}
 	},
-	data: function(){
-		return { activecontrols: false}
+	data(){
+		return { activecontrols: false }
 	}
 });
 
 var app = new Vue({
-    el: "#app",
-    data: {
-        files: [],
-        searchstring: ""
-    },
-    methods:{
-    	searchpls(){
-    		var self = this;
-    		this.files.forEach(function(element){
-    			element.show = fuzzy.test(self.searchstring.toLowerCase(), element.file.toLowerCase())
-    		});
-    	}
-    },
-    mounted: function(){
-    	var self = this;
-    	nanoajax.ajax(
-    		{ url:'/files' },
-    		function (code, responseText) {
-    			let files = JSON.parse(responseText);
-    			files.forEach(function(element){ element.show = true;});
-    			self.files = files;
+	el: "#app",
+	data: {
+		files: [],
+		searchstring: ""
+	},
+	methods:{
+		searchpls(){
+			this.files.forEach( (element) => {
+				element.show = fuzzy.test(this.searchstring.toLowerCase(), element.file.toLowerCase())
+			});
+		}
+	},
+	mounted(){
+		nanoajax.ajax(
+			{ url:'/files' },
+			(code, responseText) => {
+				let files = JSON.parse(responseText);
+				files.forEach(function(element){ element.show = true;});
+				this.files = files;
 		})
-    }
+	}
 });

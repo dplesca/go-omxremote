@@ -65,11 +65,9 @@ var app = new Vue({
 	},
 	methods:{
 		searchpls(){
-			if (this.searchstring.length >= 3){
-				this.files.forEach( (element) => {
-					element.show = fuzzy.test(this.searchstring.toLowerCase(), element.file.toLowerCase())
-				});
-			}
+			this.files.forEach( (element) => {
+				element.show = fuzzy.test(this.searchstring.toLowerCase(), element.file.toLowerCase())
+			});
 		}
 	},
 	mounted(){

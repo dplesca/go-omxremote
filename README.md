@@ -1,6 +1,6 @@
 # go-omxremote
 
-Control raspberry pi omxplayer from the browser (including mobile browsers). To install just [download the executable](https://github.com/dplesca/go-omxremote/releases/download/v2.0/go-omxremote) and run it. For help run it with the `-h` flag. Example usage (you can of course add in your path):
+Control raspberry pi omxplayer from the browser (including mobile browsers). It has absolutely zero dependencies. To install just [download the executable](https://github.com/dplesca/go-omxremote/releases/download/v2.0/go-omxremote) and run it. For help run it with the `-h` flag. Example usage (you can of course add it in your path and run it as a systemd service, unit file example below):
 
 `./go-omxremote -bind :some-port -media path/to/video/files`
 
@@ -15,7 +15,7 @@ Command flags:
     path to look for videos in (default ".")
 ```
 
-The project is geared towards mobile usage, it has been tested on both Android and iOS devices.
+The project is geared towards mobile usage, the interface has been tested on both Android and iOS devices. 
 
 ### Example systemd unit file
 
@@ -48,7 +48,7 @@ Build again:
 
 ### Credits
 
-It's written in go, uses [httprouter](https://github.com/julienschmidt/httprouter) as a router, [color](https://github.com/fatih/color) for colorized output and [esc](https://github.com/mjibson/esc) to generate and embed assets in go source files. The front-end is written in [vue](https://vuejs.org/), the style uses [bulma](http://bulma.io/).
+It's written in go, uses [httprouter](https://github.com/julienschmidt/httprouter) as a router and [esc](https://github.com/mjibson/esc) to generate and embed assets in go source files. The front-end is written in [vue](https://vuejs.org/), the style uses [bulma](http://bulma.io/).
 
 ### Screenshot
 

@@ -80,7 +80,7 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// SendCommnd is the HTTP handler for sending a command to the player
+// SendCommand is the HTTP handler for sending a command to the player
 func SendCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	err := p.SendCommand(ps.ByName("command"))
 	if err != nil {

@@ -19,15 +19,19 @@ var videosPath string
 var bindAddr string
 var p Player
 
+// HTML page struct
 type Page struct {
 	Title string
 }
 
+// Video struct contains has two fields:
+// the filename and base64 the hash of the filepath
 type Video struct {
 	File string `json:"file"`
 	Hash string `json:"hash"`
 }
 
+// Index func that serves the HTML for the home page
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	p := &Page{Title: "go-omxremote"}
 	tmpl, err := FSString(false, "/views/index.html")
@@ -39,6 +43,7 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	t.Execute(w, p)
 }
 
+// List function - outputs json with all video files in the videoPath
 func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var files []*Video
 	var root = videosPath
@@ -54,26 +59,28 @@ func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	encoder.Encode(files)
 }
 
+// Start playback http handler
 func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	filename, _ := base64.StdEncoding.DecodeString(ps.ByName("name"))
-	string_filename := string(filename[:])
+	stringFilename := string(filename[:])
 
-	err := p.Start(string_filename)
+	err := p.Start(stringFilename)
 	if err != nil {
 		p.Playing = false
 		http.Error(w, err.Error(), 500)
 		return
 	}
 
-	log.Printf("Playing media file: %s\n", string_filename)
+	log.Printf("Playing media file: %s\n", stringFilename)
 	startTime := time.Now()
 	err = p.Command.Wait()
 
-	log.Printf("Stopped media file: %s after %s\n", string_filename, time.Since(startTime))
+	log.Printf("Stopped media file: %s after %s\n", stringFilename, time.Since(startTime))
 	p.Playing = false
 	w.WriteHeader(http.StatusOK)
 }
 
+// Send command to player http handler
 func SendCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	err := p.SendCommand(ps.ByName("command"))
 	if err != nil {

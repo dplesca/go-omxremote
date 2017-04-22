@@ -23,7 +23,7 @@ type Player struct {
 	Playing bool
 }
 
-// Starts playback for a given filename
+// Start will Start omxplayer playback for a given filename
 // it will stop any playback that is currently running
 func (p *Player) Start(filename string) error {
 	var err error
@@ -46,8 +46,8 @@ func (p *Player) Start(filename string) error {
 	return err
 }
 
-// Sends command to player. Command can be one of:
-// "play", "pause", "subs", "stop", "backward", "forward"
+// SendCommand sends command to omxplayer using the pipe from the struct.
+// Command can be one of: "play", "pause", "subs", "stop", "backward", "forward"
 func (p *Player) SendCommand(command string) error {
 	if _, ok := commandList[command]; ok {
 		_, err := p.PipeIn.Write([]byte(commandList[command]))

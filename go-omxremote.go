@@ -19,7 +19,7 @@ var videosPath string
 var bindAddr string
 var p Player
 
-// HTML page struct
+// Page is the HTML page struct
 type Page struct {
 	Title string
 }
@@ -80,7 +80,7 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// Send command to player http handler
+// SendCommnd is the HTTP handler for sending a command to the player
 func SendCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	err := p.SendCommand(ps.ByName("command"))
 	if err != nil {

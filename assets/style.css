@@ -11,3 +11,6 @@ section.main{
 .search{
 	margin:0 0 1.5rem 0;
 }
+.tile h3.title{
+	cursor: pointer;
+}

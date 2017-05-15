@@ -17,6 +17,22 @@ Command flags:
 
 The project is geared towards mobile usage, the interface has been tested on both Android and iOS devices. 
 
+### Exposed HTTP API
+
+This application exposes a simple, minimal HTTP API for interfacing with the player. The exposed endpoints are:
+ - GET /files - get all video files as an array of objects with two fields: `file`, `hash`; example response:
+ ```json
+ [{"file":"test.avi","hash":"dGVzdC5hdmk="},{"file":"test.mp4","hash":"dGVzdC5tcDQ="}]
+```
+ - POST /start/:hash - starts playback for a video file
+ - POST /player/pause - toggles pause/play for video playback
+ - POST /player/stop - stops playback
+ - POST /player/forward - seeks forward in video
+ - POST /player/backward - seeks backward in video
+ - POST /player/subs - switches subs stream
+
+ One important note is that the `start` call does not return until the playback is stopped, so your request will probably time out.
+
 ### Example systemd unit file
 
 A minimal systemd unit file. It makes `go-omxremote` a service so you can control it between sessions and/or don't need a tmux/screen to keep it open.

@@ -101,7 +101,7 @@ func main() {
 	router.GET("/files", List)
 
 	router.POST("/start/:name", Start)
-	router.POST("/file/:name/:command", SendCommand)
+	router.POST("/player/:command", SendCommand)
 
 	router.ServeFiles("/assets/*filepath", FS(false))
 	log.Fatal(http.ListenAndServe(bindAddr, router))

@@ -41,7 +41,7 @@ Vue.component('video-file', {
 	methods: {
 		handleClick(action, ev){
 			ev.preventDefault();
-			let requestURL = "/file/" + this.video.hash + '/' + action;
+			let requestURL = "/player/" + action;
 			if (action == "start"){
 				requestURL = "/start/" + this.video.hash;
 			}

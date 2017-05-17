@@ -47,9 +47,7 @@ Vue.component('video-file', {
 			}
 			nanoajax.ajax(
 				{ url: requestURL, method: 'POST' },
-				(code, responseText) => {
-					console.log(JSON.parse(responseText));
-			})
+				(code, responseText) => {})
 		}
 	},
 	data(){

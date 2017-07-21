@@ -1,7 +1,7 @@
 package main
 
 import (
-	"encoding/base64"
+	"encoding/base32"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -25,7 +25,7 @@ type Page struct {
 }
 
 // Video struct contains has two fields:
-// the filename and base64 the hash of the filepath
+// the filename and base32 the hash of the filepath
 type Video struct {
 	File string `json:"file"`
 	Hash string `json:"hash"`
@@ -50,7 +50,7 @@ func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	_ = filepath.Walk(root, func(path string, f os.FileInfo, _ error) error {
 		if f.IsDir() == false {
 			if filepath.Ext(path) == ".mkv" || filepath.Ext(path) == ".mp4" || filepath.Ext(path) == ".avi" {
-				files = append(files, &Video{File: filepath.Base(path), Hash: base64.StdEncoding.EncodeToString([]byte(path))})
+				files = append(files, &Video{File: filepath.Base(path), Hash: base32.StdEncoding.EncodeToString([]byte(path))})
 			}
 		}
 		return nil
@@ -61,7 +61,8 @@ func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 // Start playback http handler
 func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	filename, _ := base64.StdEncoding.DecodeString(ps.ByName("name"))
+        log.Printf("Start %s", ps.ByName("name"))
+	filename, _ := base32.StdEncoding.DecodeString(ps.ByName("name"))
 	stringFilename := string(filename[:])
 
 	err := p.Start(stringFilename)

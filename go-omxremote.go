@@ -100,11 +100,11 @@ func main() {
 
 	router := httprouter.New()
 	router.GET("/", Index)
-	router.GET("/files", List)
+	router.GET("/files.json", List)
 
 	router.POST("/start/:name", Start)
 	router.POST("/player/:command", SendCommand)
 
-	router.ServeFiles("/assets/*filepath", FS(false))
+	router.ServeFiles("/dist/*filepath", FS(false))
 	log.Fatal(http.ListenAndServe(bindAddr, router))
 }

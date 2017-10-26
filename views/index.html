@@ -1,42 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="utf-8">
     <meta charset="UTF-8">
     <title>{{.Title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="assets/manifest.json">
-    <link rel="apple-touch-icon" href="assets/touch-icons/apple-touch-icon-114x114.png">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="manifest" href="/dist/assets/manifest.json">
+    <link rel="apple-touch-icon" href="/dist/assets/touch-icons/apple-touch-icon-114x114.png">
+    <link rel="stylesheet" href="/dist/main.css">
 </head>
-
 <body>
-<section class="hero is-primary is-bold">
-    <div class="hero-body ">
-        <div class="container">
-            <h1 class="title is-2">
-                omxremote
-            </h1>
+    <section class="hero is-primary is-bold">
+        <div class="hero-body ">
+            <div class="container">
+                <h1 class="title is-2">omxremote</h1>
+            </div>
         </div>
-    </div>
-</section>
-<section class="section main">
-	<div class="container" id="app">
-		<div class="tile search">
-			<div class="column">
-				<div class="field">
-					<p class="control has-icon has-icon-left is-expanded">
-						<input type="text" class="input is-fullwidth" name="search" id="search" v-model="searchstring" @keyup="searchpls"><span class="icon is-small is-left"><i class="fa fa-search"></i></span>
-					</p>
-				</div>
-			</div>
-		</div>
-		<video-file v-for="item in files" :key="item.hash" :video="item" :showresult="item.show"></video-file>
-	</div>
-</section>
-<script src="assets/app-vue.js"></script>
+    </section>
+    <section class="section main">
+        <div class="container" id="app"></div>
+    </section>
+    <script src="/dist/build.js"></script>
 </body>
-
 </html>

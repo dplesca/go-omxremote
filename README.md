@@ -1,6 +1,6 @@
 # go-omxremote
 
-Control raspberry pi omxplayer from the browser (including mobile browsers). It has absolutely zero dependencies. To install just [download the executable](https://github.com/dplesca/go-omxremote/releases/download/v2.0/go-omxremote) and run it. For help run it with the `-h` flag. Example usage (you can of course add it in your path and run it as a systemd service, unit file example below):
+Control raspberry pi omxplayer from the browser (including mobile browsers). It has absolutely zero dependencies. To install just [download the executable](https://github.com/dplesca/go-omxremote/releases/download/v4.0/go-omxremote) and run it. For help run it with the `-h` flag. Example usage (you can of course add it in your path and run it as a systemd service, unit file example below):
 
 `./go-omxremote -bind :some-port -media path/to/video/files`
 
@@ -54,13 +54,11 @@ WantedBy=multi-user.target
 
 ### Modify it
 
-Generate assets file using [esc](https://github.com/mjibson/esc):  
-
-`esc -o assets.go -prefix="assets" assets views`
-
-Build again:
-
-`go build`
+ - Clone repo
+ - `npm install`
+ - `npm run build` (after some changes have been made to front-end files)
+ - regenerate assets file using [esc](https://github.com/mjibson/esc): `esc -o assets.go -prefix="dist" dist views`
+ - build again: `go build`
 
 ### Credits
 

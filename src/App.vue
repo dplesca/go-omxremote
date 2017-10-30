@@ -86,5 +86,9 @@ section.main{
 }
 header.card-header{
 	cursor: pointer;
+	min-width: 0;
+}
+.card-header p{
+	overflow:hidden;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div class="card">
+<div class="card video">
     <header class="card-header" @click="activecontrols = !activecontrols;">
         <p class="card-header-title">{{video.file}}</p>
     </header>

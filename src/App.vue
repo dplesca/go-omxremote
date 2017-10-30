@@ -73,10 +73,10 @@ body .title{
 	font-weight: 400;
 }
 .tile, .video {
-		margin: 5px 0;
+	margin: 5px 0;
 }
 .tile.is-ancestor:not(:last-child){
-		margin-bottom: 1.25rem;
+	margin-bottom: 1.25rem;
 }
 section.main{
 	padding-top:1rem;
@@ -84,7 +84,7 @@ section.main{
 .search {
 	margin:0 0 1.5rem 0;
 }
-.tile h3.title{
+header.card-header{
 	cursor: pointer;
 }
 </style>

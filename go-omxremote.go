@@ -22,7 +22,8 @@ var p Player
 
 // Page is the HTML page struct
 type Page struct {
-	Title string
+	Title     string
+	Timestamp int64
 }
 
 // Video struct contains has two fields:
@@ -34,7 +35,7 @@ type Video struct {
 
 // Index func that serves the HTML for the home page
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	p := &Page{Title: "go-omxremote"}
+	p := &Page{Title: "go-omxremote", Timestamp: time.Now().Unix()}
 	tmpl, err := FSString(false, "/views/index.html")
 	if err != nil {
 		fmt.Println(err.Error())

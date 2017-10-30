@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="manifest" href="/dist/assets/manifest.json">
     <link rel="apple-touch-icon" href="/dist/assets/touch-icons/apple-touch-icon-114x114.png">
-    <link rel="stylesheet" href="/dist/main.css">
+    <link rel="stylesheet" href="/dist/main.css?{{ .Timestamp }}">
 </head>
 <body>
     <section class="hero is-primary is-bold">
@@ -21,6 +21,6 @@
     <section class="section main">
         <div class="container" id="app"></div>
     </section>
-    <script src="/dist/build.js"></script>
+    <script src="/dist/build.js?{{ .Timestamp }}"></script>
 </body>
 </html>

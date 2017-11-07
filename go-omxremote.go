@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/stretchr/powerwalk"
 )
 
 var videosPath string
@@ -49,7 +48,7 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var files []*Video
 	var root = videosPath
-	_ = powerwalk.Walk(root, func(path string, f os.FileInfo, _ error) error {
+	_ = fastWalk(root, func(path string, f os.FileMode) error {
 		if f.IsDir() == false {
 			if filepath.Ext(path) == ".mkv" || filepath.Ext(path) == ".mp4" || filepath.Ext(path) == ".avi" {
 				files = append(files, &Video{File: filepath.Base(path), Hash: base32.StdEncoding.EncodeToString([]byte(path))})

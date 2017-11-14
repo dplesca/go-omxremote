@@ -45,7 +45,6 @@ export default {
 			(code, responseText) => {
 				let files = JSON.parse(responseText);
 				//files.forEach(function(element){ element.show = true;});
-				this.files = files;
 				this.allFiles = files;
 
 				var options = {
@@ -60,6 +59,11 @@ export default {
 					]
 				};
 				fuse = new Fuse(this.allFiles, options);
+				if (this.searchstring){
+					this.files = fuse.search(this.searchstring.toLowerCase())
+				} else {
+					this.files = files;
+				}
 		})
 	},
 	components: {

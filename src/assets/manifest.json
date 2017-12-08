@@ -4,7 +4,7 @@
 	"display":"standalone",
 	"orientation": "portrait-primary",
 	"icons":[{
-		"src": "assets/touch-icons/android-touch-icon-196x196.png",
+		"src": "touch-icons/android-touch-icon-196x196.png",
    		"sizes": "72x72 96x96 128x128 196x196"
 	}]
 }

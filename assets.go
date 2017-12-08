@@ -5403,13 +5403,13 @@ k9HLPfid1jIi//FfI/7/veJjnx5xAvDNUt22m/rzx3w2xw0l/ovVf9HS/C+Nth0dvj7vJck5gSE83UoW
 
 	"/assets/manifest.json": {
 		local:   "dist/assets/manifest.json",
-		size:    251,
-		modtime: 1510583742,
+		size:    244,
+		modtime: 1512752131,
 		compressed: `
-H4sIAAAJbogA/3SOQWrEMAxF1x2YOxit6w6TxUyTq5RSRGISQWwZSQWnJXev3Qa6moU2/u+/7+/z6QkS
-xgCDg5k9xyIhsgV4bokuLPbxOJ9I84obDKCGacKV05GwUEiGRpxaNVePIJnPQhFl+4No5KQwvLVf1DEZ
-G4qqwfRi/Dku/pe4VLUwTf7/zV/7W6n3ktPcXM65ZqCvoM1x78q9cxXpb+7avZZ67mhA3drfz6f9JwAA
-//+meqf/+wAAAA==
+H4sIAAAJbogA/3SOQQrCMBBF1xZ6hzBro7SL1vYqIhLa0A40mTCJkCq9u4kWXLmYTd5//+dVFgewymjo
+BUwkyUTWhoKGYyZ+Jg73/3xE7xa1Qg8+KDuqhexOiFHboAKSzapLPawwSMdoFK/fEA5kPfTX/Is0xkOO
+BnoMs/ygc+pkwlH+3mTVNTHdydkplwghsopP7bPc1rGtRYp0jajqS0wndgPSyHYri+0dAAD///cHD2z0
+AAAA
 `,
 	},
 

@@ -26,7 +26,7 @@ type Page struct {
 }
 
 // Video struct contains has two fields:
-// the filename and base32 the hash of the filepath
+// filename and base32 hash of the filepath
 type Video struct {
 	File string `json:"file"`
 	Hash string `json:"hash"`

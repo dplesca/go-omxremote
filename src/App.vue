@@ -4,7 +4,7 @@
 		<div class="column">
 			<div class="field">
 				<p class="control has-icon has-icon-left is-expanded">
-					<input type="text" class="input is-fullwidth" name="search" id="search" v-model="searchstring" @keyup="searchFiles"><span class="icon is-small is-left"><i class="fa fa-search"></i></span>
+					<input type="text" class="input is-fullwidth" name="search" id="search" v-model="searchstring" @keyup="searchFiles"><span class="icon is-small is-left"><font-awesome-icon icon="search" /></span>
 				</p>
 			</div>
 		</div>
@@ -17,6 +17,7 @@
 import VideoFile from './VideoFile.vue'
 import Fuse from 'fuse.js';
 import nanoajax from 'nanoajax'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 require("bulma/css/bulma.css")
 
@@ -67,7 +68,8 @@ export default {
 		})
 	},
 	components: {
-		VideoFile
+		VideoFile,
+		FontAwesomeIcon
 	}
 }
 </script>

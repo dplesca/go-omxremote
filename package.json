@@ -9,8 +9,11 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.5",
+    "@fortawesome/fontawesome-free-regular": "^5.0.9",
+    "@fortawesome/fontawesome-free-solid": "^5.0.9",
+    "@fortawesome/vue-fontawesome": "0.0.22",
     "bulma": "^0.6.0",
-    "font-awesome": "^4.7.0",
     "fuse.js": "^3.2.0",
     "nanoajax": "^0.4.3",
     "vue": "^2.4.4"
@@ -28,6 +31,7 @@
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-dev-server": "^2.9.1"
   }
 }

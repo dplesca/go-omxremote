@@ -6,21 +6,21 @@
     <div class="card-content" v-show="activecontrols">
         <div class="content">
             <div class="tile">
-                <a class="button is-primary is-outlined is-fullwidth" @click="handleClick('start', $event)"><span class="icon"><i class="fa fa-play-circle-o"></i></span> <span>Start</span></a>
+                <a class="button is-primary is-outlined is-fullwidth" @click="handleClick('start', $event)"><span class="icon"><font-awesome-icon icon="play" /></span> <span>Start</span></a>
             </div>
             <div class="tile is-mobile">
                 <div class="tile is-4">
-                    <a class="button is-fullwidth" @click="handleClick('backward', $event)"><span class="icon is-small"><i class="fa fa-backward"></i></span> <span>Back</span></a>
+                    <a class="button is-fullwidth" @click="handleClick('backward', $event)"><span class="icon is-small"><font-awesome-icon icon="backward" /></span> <span>Back</span></a>
                 </div>
                 <div class="tile is-4">
-                    <a class="button is-fullwidth is-info is-outlined" @click="handleClick('pause', $event)"><span class="icon"><i class="fa fa-pause-circle-o"></i></span> <span>Pause</span></a>
+                    <a class="button is-fullwidth is-info is-outlined" @click="handleClick('pause', $event)"><span class="icon"><font-awesome-icon icon="pause" /></span> <span>Pause</span></a>
                 </div>
                 <div class="tile is-4">
-                    <a class="button is-fullwidth" @click="handleClick('forward', $event)"><span class="icon is-small"><i class="fa fa-forward"></i></span> <span>Forward</span></a>
+                    <a class="button is-fullwidth" @click="handleClick('forward', $event)"><span class="icon is-small"><font-awesome-icon icon="forward" /></span> <span>Forward</span></a>
                 </div>
             </div>
-            <div class="tile"><a class="button is-fullwidth" @click="handleClick('subs', $event)"><span class="icon is-small"><i class="fa fa-file-text-o"></i></span><span>Subs</span></a></div>
-            <div class="tile"><a class="button is-primary is-danger is-fullwidth is-outlined" @click="handleClick('stop', $event)"><span class="icon"><i class="fa fa-stop-circle-o"></i></span> <span>Stop</span></a></div>
+            <div class="tile"><a class="button is-fullwidth" @click="handleClick('subs', $event)"><span class="icon is-small"><font-awesome-icon icon="align-justify" /></span><span>Subs</span></a></div>
+            <div class="tile"><a class="button is-primary is-danger is-fullwidth is-outlined" @click="handleClick('stop', $event)"><span class="icon"><font-awesome-icon icon="stop" /></span> <span>Stop</span></a></div>
         </div>
     </div>
 </div>
@@ -28,13 +28,15 @@
 
 <script>
 import nanoajax from 'nanoajax'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+
 export default{
 	name: "video-file",
 	data(){
 		return {
 			activecontrols: false
 		}
-	},
+    },
 	props: ['video'],
 	methods: {
 		handleClick(action, ev){
@@ -47,6 +49,9 @@ export default{
 				{ url: requestURL, method: 'POST' },
 				(code, responseText) => {})
 		}
-	},
+    },
+    components: {
+        FontAwesomeIcon
+    }
 }
 </script>

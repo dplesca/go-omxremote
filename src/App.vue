@@ -19,7 +19,7 @@ import Fuse from 'fuse.js';
 import nanoajax from 'nanoajax'
 
 require("bulma/css/bulma.css")
-require("font-awesome/css/font-awesome.css")
+
 let fuse;
 export default {
 	name: 'app',
@@ -44,7 +44,7 @@ export default {
 			{ url:'/files.json' },
 			(code, responseText) => {
 				let files = JSON.parse(responseText);
-				//files.forEach(function(element){ element.show = true;});
+
 				this.allFiles = files;
 
 				var options = {

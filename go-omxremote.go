@@ -8,11 +8,11 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"os"
 	"path/filepath"
 	"time"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/karrick/godirwalk"
 )
 
 var videosPath string
@@ -48,14 +48,21 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	var files []*Video
 	var root = videosPath
-	_ = fastWalk(root, func(path string, f os.FileMode) error {
-		if f.IsDir() == false {
-			if filepath.Ext(path) == ".mkv" || filepath.Ext(path) == ".mp4" || filepath.Ext(path) == ".avi" {
-				files = append(files, &Video{File: filepath.Base(path), Hash: base32.StdEncoding.EncodeToString([]byte(path))})
+	_ = godirwalk.Walk(root, &godirwalk.Options{
+		Unsorted: true, // set true for faster yet non-deterministic enumeration (see godoc)
+		Callback: func(osPathname string, de *godirwalk.Dirent) error {
+			if de.IsDir() == false {
+				if filepath.Ext(osPathname) == ".mkv" || filepath.Ext(osPathname) == ".mp4" || filepath.Ext(osPathname) == ".avi" {
+					files = append(files, &Video{File: filepath.Base(osPathname), Hash: base32.StdEncoding.EncodeToString([]byte(osPathname))})
+				}
 			}
-		}
-		return nil
+			return nil
+		},
+		ErrorCallback: func(osPathname string, err error) godirwalk.ErrorAction {
+			return godirwalk.SkipNode
+		},
 	})
+
 	encoder := json.NewEncoder(w)
 	encoder.Encode(files)
 }

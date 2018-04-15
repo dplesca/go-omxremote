@@ -81,11 +81,6 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 
 	log.Printf("Playing media file: %s\n", stringFilename)
-	startTime := time.Now()
-	err = p.Command.Wait()
-
-	log.Printf("Stopped media file: %s after %s\n", stringFilename, time.Since(startTime))
-	p.Playing = false
 	w.WriteHeader(http.StatusOK)
 }
 

@@ -34,7 +34,8 @@ export default{
 	name: "video-file",
 	data(){
 		return {
-			activecontrols: false
+			activecontrols: false,
+            activestart: true,
 		}
     },
 	props: ['video'],
@@ -42,12 +43,19 @@ export default{
 		handleClick(action, ev){
 			ev.preventDefault();
 			let requestURL = "/player/" + action;
-			if (action == "start"){
+			if (action == "start" && this.activestart == true){
+                this.activestart = false;
 				requestURL = "/start/" + this.video.hash;
-			}
-			nanoajax.ajax(
-				{ url: requestURL, method: 'POST' },
-				(code, responseText) => {})
+                nanoajax.ajax(
+				    { url: requestURL, method: 'POST' },
+                    (code, responseText) => {
+                        this.activestart = true;
+                });
+			} else {
+                nanoajax.ajax(
+				    { url: requestURL, method: 'POST' },
+				    (code, responseText) => {});
+            }
 		}
     },
     components: {

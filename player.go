@@ -29,6 +29,7 @@ func (p *Player) Start(filename string) error {
 	var err error
 	if p.Playing == true {
 		p.SendCommand("stop")
+		p.Playing = false
 	}
 	p.Command = exec.Command("omxplayer", "-o", "hdmi", filename)
 	p.PipeIn, err = p.Command.StdinPipe()

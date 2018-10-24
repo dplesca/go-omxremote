@@ -1,7 +1,7 @@
 package main
 
 import (
-	"encoding/base32"
+	"encoding/base64"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -53,7 +53,7 @@ func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		Callback: func(osPathname string, de *godirwalk.Dirent) error {
 			if de.IsDir() == false {
 				if filepath.Ext(osPathname) == ".mkv" || filepath.Ext(osPathname) == ".mp4" || filepath.Ext(osPathname) == ".avi" {
-					files = append(files, &Video{File: filepath.Base(osPathname), Hash: base32.StdEncoding.EncodeToString([]byte(osPathname))})
+					files = append(files, &Video{File: filepath.Base(osPathname), Hash: base64.URLEncoding.EncodeToString([]byte(osPathname))})
 				}
 			}
 			return nil
@@ -70,7 +70,7 @@ func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 // Start playback http handler
 func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	log.Printf("Start %s", ps.ByName("name"))
-	filename, _ := base32.StdEncoding.DecodeString(ps.ByName("name"))
+	filename, _ := base64.URLEncoding.DecodeString(ps.ByName("name"))
 	stringFilename := string(filename[:])
 
 	err := p.Start(stringFilename)

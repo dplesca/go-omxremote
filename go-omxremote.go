@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"path/filepath"
 	"time"
+	"strings"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/karrick/godirwalk"
@@ -17,6 +18,7 @@ import (
 
 var videosPath string
 var bindAddr string
+var omx string
 var p Player
 
 // Page is the HTML page struct
@@ -72,8 +74,9 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	log.Printf("Start %s", ps.ByName("name"))
 	filename, _ := base64.URLEncoding.DecodeString(ps.ByName("name"))
 	stringFilename := string(filename[:])
+	omxOptions := append(strings.Split(omx, " "), stringFilename)
 
-	err := p.Start(stringFilename)
+	err := p.Start(omxOptions)
 	if err != nil {
 		p.Playing = false
 		http.Error(w, err.Error(), 500)
@@ -98,6 +101,7 @@ func SendCommand(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func main() {
 	flag.StringVar(&videosPath, "media", ".", "Path to look for videos in")
 	flag.StringVar(&bindAddr, "bind", ":31415", "Address to bind on.")
+	flag.StringVar(&omx, "omx", "-o hdmi", "Options to pass to omxplayer")
 	flag.Parse()
 
 	router := httprouter.New()

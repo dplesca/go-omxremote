@@ -25,13 +25,14 @@ type Player struct {
 
 // Start will Start omxplayer playback for a given filename
 // it will stop any playback that is currently running
-func (p *Player) Start(filename string) error {
+func (p *Player) Start(options []string) error {
 	var err error
 	if p.Playing == true {
 		p.SendCommand("stop")
 		p.Playing = false
 	}
-	p.Command = exec.Command("omxplayer", "-o", "hdmi", filename)
+
+	p.Command = exec.Command("omxplayer", options...)
 	p.PipeIn, err = p.Command.StdinPipe()
 	if err != nil {
 		return err

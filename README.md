@@ -13,6 +13,9 @@ Command flags:
             (default ":31415")
 -media string
     path to look for videos in (default ".")
+
+-omx string
+    omx options (default "-o hdmi")
 ```
 
 The project is geared towards mobile usage, the interface has been tested on both Android and iOS devices. 

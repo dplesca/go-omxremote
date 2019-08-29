@@ -65,8 +65,8 @@ WantedBy=multi-user.target
 
 ### Credits
 
-It's written in go, uses [httprouter](https://github.com/julienschmidt/httprouter) as a router and [esc](https://github.com/mjibson/esc) to generate and embed assets in go source files. The front-end is written in [vue](https://vuejs.org/), the style uses [bulma](http://bulma.io/).
+It's written in go, uses [httprouter](https://github.com/julienschmidt/httprouter) as a router and [esc](https://github.com/mjibson/esc) to generate and embed assets in go source files. The front-end is written in [svelte](https://svelte.dev/), the style uses [tailwind](http://https://tailwindcss.com/).
 
 ### Screenshot
 
-![Android](http://i.imgur.com/zBmjbiU.png)
+![Android](https://i.imgur.com/ZRff2I2.png)

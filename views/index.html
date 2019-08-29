@@ -8,11 +8,11 @@
     <title>{{.Title}}</title>
     <link rel="manifest" href="/dist/assets/manifest.json">
     <link rel="apple-touch-icon" href="/dist/assets/touch-icons/apple-touch-icon-114x114.png">
-    <link rel="stylesheet" href="/dist/main.css">
-    <link rel="stylesheet" href="/dist/components.css">
+    <link rel="stylesheet" href="/dist/main.css?{{ .Timestamp }}">
+    <link rel="stylesheet" href="/dist/components.css?{{ .Timestamp }}">
 </head>
 <body>
     
-    <script src="/dist/main.js"></script>
+    <script src="/dist/main.js?{{ .Timestamp }}"></script>
 </body>
 </html>

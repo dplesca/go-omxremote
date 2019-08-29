@@ -41,9 +41,13 @@
 header{background-image: linear-gradient(141deg,#009e6c,#00d1b2 71%,#00e7eb);}
 </style>
 
-<header class="px-20 py-5 w-full"><h1 class="text-3xl text-white">omxremote</h1></header>
+<header class="px-20 py-5 w-full">
+  <h1 class="text-3xl text-white">omxremote</h1>
+</header>
 <div class="container mx-auto my-5">
-  <input bind:value={q} type="text" class="m-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" on:keyup={search}>
+  <div class="p-2">
+    <input bind:value={q} type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" on:keyup={search}>
+  </div>
 	{#each files as videofile}
 	<VideoFile file={videofile.file} hash={videofile.hash}></VideoFile>
 	{/each}

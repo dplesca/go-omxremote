@@ -19,23 +19,23 @@ const clickVideo = (e) => {
 
 </script>
 
-<div class="w-full rounded overflow-hidden shadow m-2">
+<div class="w-full rounded overflow-hidden shadow p-2">
     <header class="p-2" on:click={clickVideo}>
         <p class="font-semibold">{file}</p>
     </header>
     {#if activecontrols === true}
-        <div class="flex m-1">
+        <div class="flex my-1">
             <Button action="start" icon={faPlay} text="Start" hash="{hash}"></Button>
         </div>
-        <div class="flex m-1">
+        <div class="flex my-1">
             <Button action="backward" icon={faBackward} text="Back"></Button>
             <Button action="pause" icon={faPause} text="Pause"></Button>
             <Button action="forward" icon={faForward} text="Forward"></Button>
         </div>
-        <div class="flex m-1">
+        <div class="flex my-1">
             <Button action="subs" icon={faAlignJustify} text="Subs"></Button>
         </div>
-        <div class="flex m-1">
+        <div class="flex my-1">
             <Button action="stop" icon={faStop} text="Stop"></Button>
         </div>
     {/if}

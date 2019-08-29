@@ -65,11 +65,11 @@ const sendCommand = (action) => {
   .stop:hover{ 
     @apply bg-red-500 
   }
-  .backward, .forward, .subs {
+  .backward, .forward, .prevsubs, .nextsubs {
     @apply text-gray-700 border-gray-500
   }
-  .backward:hover, .forward:hover, .subs:hover{ 
-    @apply bg-gray-500 
+  .backward:hover, .forward:hover, .prevsubs:hover, .nextsubs:hover {
+    @apply bg-gray-500
   }
 </style>
 

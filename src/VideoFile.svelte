@@ -33,10 +33,11 @@ const clickVideo = (e) => {
             <Button action="forward" icon={faForward} text="Forward"></Button>
         </div>
         <div class="flex my-1">
-            <Button action="subs" icon={faAlignJustify} text="Subs"></Button>
+            <Button action="stop" icon={faStop} text="Stop"></Button>
         </div>
         <div class="flex my-1">
-            <Button action="stop" icon={faStop} text="Stop"></Button>
+            <Button action="prevsubs" icon={faAlignJustify} text="Prev subs"></Button>
+            <Button action="nextsubs" icon={faAlignJustify} text="Next subs"></Button>
         </div>
     {/if}
 </div>

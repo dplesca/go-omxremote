@@ -9,7 +9,8 @@ import (
 var commandList = map[string]string{
 	"play":     "p",
 	"pause":    "p",
-	"subs":     "m",
+	"nextsubs": "m",
+	"prevsubs": "n",
 	"stop":     "q",
 	"backward": "\x1b[D",
 	"forward":  "\x1b[C",

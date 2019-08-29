@@ -1,7 +1,7 @@
 {
    "name": "go-omxremote",
    "description": "browser based omxplayer remote",
-   "version": "4.0.0",
+   "version": "5.0.0",
    "author": "Dragos Plesca <dragos.plesca@gmail.com>",
    "private": true,
    "main": " ",

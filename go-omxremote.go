@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"time"
 	"strings"
+	"os/exec"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/karrick/godirwalk"
@@ -19,6 +20,7 @@ import (
 var videosPath string
 var bindAddr string
 var omx string
+var yt string
 var p Player
 
 // Page is the HTML page struct
@@ -65,8 +67,12 @@ func List(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		},
 	})
 
-	encoder := json.NewEncoder(w)
-	encoder.Encode(files)
+	if len(files) > 0 {
+		encoder := json.NewEncoder(w)
+		encoder.Encode(files)
+	} else {
+		w.Write([]byte("[]"))
+	}
 }
 
 // Start playback http handler
@@ -77,6 +83,35 @@ func Start(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	omxOptions := append(strings.Split(omx, " "), stringFilename)
 
 	err := p.Start(omxOptions)
+	if err != nil {
+		p.Playing = false
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	log.Printf("Playing media file: %s\n", stringFilename)
+	w.WriteHeader(http.StatusOK)
+}
+
+// Play youtube http handler
+func Play(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	if err := r.ParseForm(); err != nil {
+		p.Playing = false
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	log.Printf("Play %s", r.FormValue("link"))
+	ytOptions := append(strings.Split(yt, " "), r.FormValue("link"))
+	out, err := exec.Command("youtube-dl", ytOptions...).Output()
+    if err != nil {
+		p.Playing = false
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	stringFilename := strings.Trim(string(out), "\r\n")
+	omxOptions := append(strings.Split(omx, " "), stringFilename)
+
+	err = p.Start(omxOptions)
 	if err != nil {
 		p.Playing = false
 		http.Error(w, err.Error(), 500)
@@ -102,6 +137,7 @@ func main() {
 	flag.StringVar(&videosPath, "media", ".", "Path to look for videos in")
 	flag.StringVar(&bindAddr, "bind", ":31415", "Address to bind on.")
 	flag.StringVar(&omx, "omx", "-o hdmi", "Options to pass to omxplayer")
+	flag.StringVar(&yt, "yt", "-g", "Options to pass to youtube-dl")
 	flag.Parse()
 
 	router := httprouter.New()
@@ -109,6 +145,7 @@ func main() {
 	router.GET("/files.json", List)
 
 	router.POST("/start/:name", Start)
+	router.POST("/play/", Play)
 	router.POST("/player/:command", SendCommand)
 
 	router.ServeFiles("/dist/*filepath", FS(false))

@@ -4,6 +4,8 @@ Control raspberry pi omxplayer from the browser (including mobile browsers). It 
 
 `./go-omxremote -bind :some-port -media path/to/video/files`
 
+To play youtube videos you need to install the python lib YouTube-DL [download here](https://youtube-dl.org/)
+
 Command flags:
 
 ```
@@ -16,6 +18,8 @@ Command flags:
 
 -omx string
     omx options (default "-o hdmi")
+-yt string
+    youtube-dl options (default "-g")
 ```
 
 The project is geared towards mobile usage, the interface has been tested on both Android and iOS devices. 

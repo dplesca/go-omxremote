@@ -6,12 +6,15 @@ export let icon;
 export let action;
 export let text;
 export let hash = "";
+export let link = "";
 
 let activestart = true;
 
 const handleClick = (e) => {
   if (action == "start"){
     startVideo();
+  } else if (action == "play"){
+    playVideo();
   } else {
     sendCommand(action);
   }
@@ -22,6 +25,17 @@ const startVideo = () => {
         activestart = false;
         nanoajax.ajax(
             { url: "/start/" + hash, method: 'POST' },
+            (code, responseText) => {
+                activestart = true;
+        });
+    }
+}
+
+const playVideo = () => {
+    if (activestart == true){
+        activestart = false;
+        nanoajax.ajax(
+            { url: "/play/", method: 'POST', body: 'link=' + encodeURIComponent(link) },
             (code, responseText) => {
                 activestart = true;
         });
@@ -57,6 +71,12 @@ const sendCommand = (action) => {
     @apply text-green-700 border-green-500
   }
   .start:hover{ 
+    @apply bg-green-500 
+  }
+  .play {
+    @apply text-green-700 border-green-500
+  }
+  .play:hover{ 
     @apply bg-green-500 
   }
   .stop {

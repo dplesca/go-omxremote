@@ -18,7 +18,7 @@ Command flags:
     omx options (default "-o hdmi")
 ```
 
-The project is geared towards mobile usage, the interface has been tested on both Android and iOS devices. 
+The project is geared towards mobile usage, the interface has been tested on both Android and iOS devices. This project is intended to be used with local files only, to add YouTube playback functionality please [check out this fork](https://github.com/luizpestana/go-omxremote/tree/feat/add-youtube-dl).
 
 ### Exposed HTTP API
 

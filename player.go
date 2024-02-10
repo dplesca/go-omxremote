@@ -12,8 +12,10 @@ var commandList = map[string]string{
 	"nextsubs": "m",
 	"prevsubs": "n",
 	"stop":     "q",
-	"backward": "\x1b[D",
+	"up":       "\x1b[A",
+	"down":     "\x1b[B",
 	"forward":  "\x1b[C",
+	"backward": "\x1b[D",
 }
 
 // Player is the struct that controls the playback on the omxplayer
@@ -28,7 +30,7 @@ type Player struct {
 // it will stop any playback that is currently running
 func (p *Player) Start(options []string) error {
 	var err error
-	if p.Playing == true {
+	if p.Playing {
 		p.SendCommand("stop")
 		p.Playing = false
 	}

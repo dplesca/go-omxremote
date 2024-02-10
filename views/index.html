@@ -1,18 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="color-scheme" content="light dark" />
+    <link rel="manifest" href="/static/public/manifest.json">
+    <link rel="apple-touch-icon" href="/static/public/touch-icons/apple-touch-icon-114x114.png">
+    <link rel="stylesheet" href="/static/public/css/pico.min.css?{{ .Timestamp }}" />
+    <script src="/static/public/js/htmx.min.js?{{ .Timestamp }}"></script>
     <title>{{.Title}}</title>
-    <link rel="manifest" href="/dist/assets/manifest.json">
-    <link rel="apple-touch-icon" href="/dist/assets/touch-icons/apple-touch-icon-114x114.png">
-    <link rel="stylesheet" href="/dist/main.css?{{ .Timestamp }}">
-    <link rel="stylesheet" href="/dist/components.css?{{ .Timestamp }}">
-</head>
-<body>
-    
-    <script src="/dist/main.js?{{ .Timestamp }}"></script>
-</body>
+  </head>
+  <body>
+    <main class="container">
+      <h2><a href="/">omxremote</a></h2>
+      <form role="search">
+        <input name="search" type="search" placeholder="Search" value="{{.Search}}" />
+        <input type="submit" value="Search" />
+      </form>
+      {{range .Files}}
+      <details>
+        <summary>
+            <h3>{{.File}}</h3>
+        </summary>
+        <p>
+          <div class="grid">
+            <div class="grid"><button hx-post="/start/{{.Hash}}">Play</button></div>
+            <div class="grid"><button hx-post="/player/pause" class="secondary">Pause</button></div>
+            <div class="grid"><button hx-post="/player/stop" class="secondary">Stop</button></div>
+          </div>
+          <div class="grid" style="margin-top:15px;">
+            <div class="grid">
+              <button class="outline" hx-post="/player/down">-10min</button>
+              <button class="outline" hx-post="/player/backward">-30s</button>
+            </div>
+            <div class="grid">
+              <button class="outline secondary" hx-post="/player/prevsubs">Previous Subtitle</button>
+              <button class="outline secondary" hx-post="/player/nextsubs">Next Subtitle</button>
+            </div>
+            <div class="grid">
+              <button class="outline" hx-post="/player/forward">+30s</button>
+              <button class="outline" hx-post="/player/up">+10min</button>
+            </div>
+          </div>
+        </p>
+      </details>
+      {{end}}
+    </main>
+  </body>
 </html>

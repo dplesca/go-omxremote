@@ -23,15 +23,13 @@ The project is geared towards mobile usage, the interface has been tested on bot
 ### Exposed HTTP API
 
 This application exposes a simple, minimal HTTP API for interfacing with the player. The exposed endpoints are:
- - GET /files - get all video files as an array of objects with two fields: `file`, `hash`; example response:
- ```json
- [{"file":"test.avi","hash":"dGVzdC5hdmk="},{"file":"test.mp4","hash":"dGVzdC5tcDQ="}]
-```
  - POST /start/:hash - starts playback for a video file
  - POST /player/pause - toggles pause/play for video playback
  - POST /player/stop - stops playback
- - POST /player/forward - seeks forward in video
- - POST /player/backward - seeks backward in video
+ - POST /player/forward - seeks forward in video (30 seconds)
+ - POST /player/backward - seeks backward in video (30 seconds)
+ - POST /player/up - seeks forward in video (10 minutes)
+ - POST /player/down - seeks backward in video (10 minutes)
  - POST /player/subs - switches subs stream
 
  One important note is that the `start` call does not return until the playback is stopped, so your request will probably time out.
@@ -58,15 +56,9 @@ WantedBy=multi-user.target
 ### Modify it
 
  - Clone repo
- - `npm install`
- - `npm run build` (after some changes have been made to front-end files)
- - regenerate assets file using [esc](https://github.com/mjibson/esc): `esc -o assets.go -prefix="dist" dist views`
+ - make some changes
  - build again: `go build`
 
 ### Credits
 
-It's written in go, uses [httprouter](https://github.com/julienschmidt/httprouter) as a router and [esc](https://github.com/mjibson/esc) to generate and embed assets in go source files. The front-end is written in [svelte](https://svelte.dev/), the style uses [tailwind](http://https://tailwindcss.com/).
-
-### Screenshot
-
-![Android](https://i.imgur.com/ZRff2I2.png)
+It's written in go. The front-end is written in html with a little sprinkled [htmx](https://htmx.org/), the style uses [picocss](https://v2.picocss.com/).
